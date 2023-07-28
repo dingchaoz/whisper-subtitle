@@ -5,3 +5,4 @@ flagged/
 *.py[cod]
 *$py.class
 .venv
+videos/

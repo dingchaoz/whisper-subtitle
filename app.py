@@ -10,7 +10,7 @@ import pathlib
 import tempfile
 import zipfile
 import numpy as np
-
+from src.translate import translate_array_elements
 import torch
 
 from src.config import VAD_INITIAL_PROMPT_MODE_VALUES, ApplicationConfig, VadInitialPromptMode
@@ -323,6 +323,9 @@ class WhisperTranscriber:
                 # Default VAD
                 result = whisperCallable.invoke(audio_path, 0, None, None, progress_listener=progressListener)
 
+        # Translate the segments
+        translate_array_elements(result['segments'])
+        
         return result
 
     def _create_progress_listener(self, progress: gr.Progress):
